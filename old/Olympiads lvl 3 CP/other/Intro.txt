@@ -1,0 +1,14 @@
+**********************************
+ACCESS CODE: 496ef550dec3
+**********************************
+
+Summer lvl 3 :
+Data Structures:
+- set, list, map
+- que, deque, 
+
+Contests:
+-CCC, CCO, IOI
+- USACO: dec-mar, 4hrs, 3 questions, 
+- DMOJ monthly
+- AtCoder

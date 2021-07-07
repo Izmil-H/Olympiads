@@ -1,0 +1,9 @@
+given a number line with points, find a location with the miniumum sum distance:
+    --> the answer is always the median of the points.
+
+
+bruce draws lines extending from the people representing a graph of the distance and time.
+
+the graph on the left represents the sum distance as the concert location moves along the number line
+
+so it IS binary search. he compares the middle-left with middle-left + 1
