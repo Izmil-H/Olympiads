@@ -12,8 +12,7 @@ using namespace std;
 #define aIN(n,arr) fo(i,n){cin>>arr[i];}
 
 
-const int sz = 1e4;
-short a[sz+2][sz+2];
+bool a[10002][10002];
 
 int main() {
     int n, m, x, y, w, h;
@@ -21,23 +20,27 @@ int main() {
 
     fo(i,m) {
         cin >> x >> y >> w >> h;
+        x++;y++;
+        a[x][y] ^= 1; 
+        a[x+w][y] ^= 1;
+        a[x][y+h] ^= 1;
+        a[x+w][y+h] ^= 1;
     } 
 
-    //Fo(i,0,n+2,1) { Fo(j,0,n+2,1) { cout << setw(2) << setfill(' ') << a[i][j]; } cout << endl;}
 
     Fo(i,1,n+2,1) {
         Fo(j,1,n+2,1) {
-            a[i][j] += a[i][j-1];
+            a[i][j] ^= a[i][j-1];
         }
     }
+
     int ans = 0;
     Fo(i,1,n+2,1) {
         Fo(j,1,n+2,1) {
-            a[j][i] += a[j-1][i];
-            if (a[j][i]%2) ans++;
+            a[j][i] ^= a[j-1][i];
+            if (a[j][i]) ans++;
         }
     }
 
-    //cout << endl; Fo(i,0,n+2,1) { Fo(j,0,n+2,1) { cout << setw(2) << setfill(' ') << a[i][j]; } cout << endl;}
     cout << ans;
 }
