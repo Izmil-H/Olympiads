@@ -14,31 +14,31 @@ using namespace std;
 
 int main() {
     int n, q, x, y, r;
-    map<int, int> mp;
+    vector<int> key, val;
+    stack<int> stk;
+
     cin >> n >> q;
     fo(i,n) {
-        cin >> x >> y;
+        cin >> x >> y; 
+        int shft = 0;
         int dst = ceil(sqrt(x*x + y*y));
-        mp[dst]++;
-    }
-    int temp[mp.size()], cnt = 0;
-    for(auto it: mp) {
-        temp[cnt] = it.S; 
-        cnt++;
-        cout << it.F << ":" << it.S << ":" << temp[cnt-1] << ", ";
-    }
-    cout << endl;
-    cnt = 0;
-    for(auto it: mp) { 
-        temp[cnt] += temp[cnt-1]; 
-        it.S = temp[cnt]; 
-        cnt++;
+        if (!stk.size()) stk.push(dst);
+        else {
+            while (dst < stk.top()) {
+                shft++; stk.pop();
+                if (!stk.size()) break;
+            }
+            stk.push(dst);
+        }
+        key.insert(key.end()-shft, dst);
+        val.insert(val.end()-shft, stk.size());
     }
 
     fo(i,q) {
         cin >> r;
-        cout << "#" << mp[r] << endl;
+        int ind = lower_bound(key.begin(), key.end(), r) - key.begin();
+        cout << (key[ind] == r? val[ind]: val[ind-1]) << endl;
+        cout << endl;
     }
-    for(auto it: temp) cout << it << " "; cout << endl;
-    for(auto it: mp) cout << it.F << ":" << it.S << ", ";
-}
+    //for(auto it: key) cout << it << " "; cout << endl;
+    //for(auto it: val) cout << it << " ";
