@@ -12,9 +12,8 @@ using namespace std;
 #define aIN(n,arr) fo(i,n){cin>>arr[i];}
 
 
-const int sz = 1e5;
-ll ar[sz];
-int A[sz], B[sz], C[sz];
+const int sz = 1e5 + 3;
+ll d1[sz], d2[sz], d3[sz];
 int main() {
     int n, t;
     cin >> n >> t;
@@ -22,11 +21,19 @@ int main() {
     fo(i,n) {
         int L, R, a, b, c;
         cin >> L >> R >> a >> b >> c;
-        
-        fo(j,R-L+1) ar[L+j] += a*(j*j) + b*j + c;
+        d1[L] += a; d1[R+1] -= a;
+        ll temp = b-2*a*L;
+        d2[L] += temp; d2[R+1] -= temp;
+        temp = a*L*L - b*L + c;
+        d3[L] += temp; d3[R+1] -= temp;       
     }
     
-    Fo(i,1,t+1,1) cout << ar[i] << " ";
+    Fo(i,1,t+1,1) {
+        d1[i] += d1[i-1];
+        d2[i] += d2[i-1];
+        d3[i] += d3[i-1];
+        cout << d1[i]*i*i + d2[i]*i + d3[i] << " ";
+    }
 }
 
 
