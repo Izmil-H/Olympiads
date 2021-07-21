@@ -13,32 +13,32 @@ using namespace std;
 
 
 int main() {
-    int n, q, x, y, r;
-    vector<int> key, val;
-    stack<int> stk;
-
+    int n, q, x, y, r, cnt = 1;
     cin >> n >> q;
+    map<int,int> mp;
+    vector<int> key, val;
+    key.PB(-1); val.PB(0);
+
     fo(i,n) {
-        cin >> x >> y; 
-        int shft = 0;
+        cin >> x >> y;
         int dst = ceil(sqrt(x*x + y*y));
-        if (!stk.size()) stk.push(dst);
-        else {
-            while (dst < stk.top()) {
-                shft++; stk.pop();
-                if (!stk.size()) break;
-            }
-            stk.push(dst);
-        }
-        key.insert(key.end()-shft, dst);
-        val.insert(val.end()-shft, stk.size());
+        mp[dst]++;
+    }
+    
+    for(auto it: mp) {
+        //cout << it.F << ":" << it.S << ", ";
+        key.PB(it.F);
+        val.PB(it.S);
+        if (cnt > 0) val[cnt] += val[cnt-1];
+        cnt++;
     }
 
+    //cout << endl;
+    //fo(i,key.size()) cout << key[i] << " "; cout << endl;
+    //fo(i,val.size()) cout << val[i] << " "; cout << endl;
     fo(i,q) {
         cin >> r;
         int ind = lower_bound(key.begin(), key.end(), r) - key.begin();
         cout << (key[ind] == r? val[ind]: val[ind-1]) << endl;
-        cout << endl;
     }
-    //for(auto it: key) cout << it << " "; cout << endl;
-    //for(auto it: val) cout << it << " ";
+} 
