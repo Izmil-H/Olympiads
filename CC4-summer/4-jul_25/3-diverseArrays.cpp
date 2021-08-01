@@ -13,6 +13,11 @@ using namespace std;
 
 
 int main() {
-    int n;
-    
+    int n, k, x;
+    cin >> n >> k;
+    map<int, int> mp;
+    fo(i,n) {
+        cin >> x;
+        mp[x]++;
+    } 
 }

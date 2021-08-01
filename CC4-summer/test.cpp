@@ -12,11 +12,8 @@ using namespace std;
 #define Fo(i,is,ie,in) for(int i=is; i<ie; i+=in)
 #define aIN(n,arr) fo(i,n){cin>>arr[i];}
 
+char test[4];
 
 int main() {
-    vector<int> vec;
-    vec.PB(5);
-    stack<int> stk;
-    stk.P(3);
-    cout << vec.back() << stk.top();
+    cout << "-" << test[2] << "-";
 }
