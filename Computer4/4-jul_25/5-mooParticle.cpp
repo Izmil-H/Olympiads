@@ -21,7 +21,7 @@ int main() {
         cin >> x >> y;
         a.PB({x,y});
     }
-    sort(a.begin(), a.end());
+    sort(a.begin(), a.end(), greater<pii>());
     stack<int> stk;
     for (pii e: a) {
         if (stk.empty() || e.S > stk.top()) stk.push(e.S);
