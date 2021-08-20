@@ -15,23 +15,23 @@ using namespace std;
 #define aIN(n,arr) fo(i,n){cin>>arr[i];}
 const int MS = 5e5+2;
 
-int n, m, ans;
-mii mr;
+int n, m; ll ans;
+mii mr, mc;
 
 int main() {
     cin >> n >> m; 
     Fo(i,1,n+1,1){
         int r; cin >> r; 
-        if (r >= 0) mr[r-i] = 1;
+        if (r >= 0) mr[r-i]++;
     }
     Fo(j,1,m+1,1){
         int c; cin >> c;
-        if (c >= 0 && mr[c-j] == 1) {
-            ans++;
-            mr[c-j] = -1;
-        }
+        if (c >= 0) mc[c-j]++;
     }
-    cout << ans;
+    for (auto e: mr) {
+        ans += min(e.S, mc[e.F]);
+    }
+    cout << ans << endl;
 }
 
 /*

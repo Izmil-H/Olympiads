@@ -16,9 +16,14 @@ using namespace std;
 const int MS = 5e5+2;
 
 int n, m, r[MS], c[MS], ans;
+char s[2][10];
 
 int main() {
-    v(int) vec = {1,2,3,4,5};
-    vec.erase(vec.begin() + 1);
-    for (auto x: vec) cout << x << " ";
+    cin >> s[0];
+    fo(i,2) {
+        fo(j,10) {
+            cout << s[i][j] << " ";
+        }
+        cout << endl;
+    }
 }
