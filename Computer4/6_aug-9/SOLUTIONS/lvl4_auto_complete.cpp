@@ -1,7 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
-struct node { node *ch[26]; };
+
+struct node { 
+    node *ch[26]; 
+};
+
 int T, n, ans; string word;
+
 void insert(node *root, string& word){
     node *cur = root; int pre = 0, flag = 1;
     for(char c: word){
@@ -15,11 +20,13 @@ void insert(node *root, string& word){
     }
     ans += pre;
 }
+
 void remove(node *root){
     if(!root) return;
     for(auto e: root->ch) remove(e);
     delete root; root=nullptr;
 }
+
 int main(){
     //freopen("test.txt", "r", stdin);
     cin >> T;
