@@ -13,8 +13,10 @@ using namespace std;
 #define fo(i,n) for(int i=0; i<n; i++)
 #define Fo(i,is,ie,in) for(int i=is; i<ie; i+=in)
 #define aIN(n,arr) fo(i,n){cin>>arr[i];}
+const int MS = 5e5+2;
 
 int main() {
-    int n;
-    cin >> n;
+    pii a = {1,2}, b = {2,3}, c = max(a,b);
+    b = a;
+    cout << b.F << " " << b.S;
 }

@@ -1,0 +1,5 @@
+What is it? 
+    A data structure serving as an array that allows us to both update and query a range in O(logn).
+
+How does it work?
+    It's a normal array but each cell stores a different interval sum such that it 

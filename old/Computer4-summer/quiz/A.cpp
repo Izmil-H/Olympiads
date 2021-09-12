@@ -13,25 +13,24 @@ using namespace std;
 #define fo(i,n) for(int i=0; i<n; i++)
 #define Fo(i,is,ie,in) for(int i=is; i<ie; i+=in)
 #define aIN(n,arr) fo(i,n){cin>>arr[i];}
-const int MS = 5e5+2;
 
-struct basic {
-    int len = 5;
-};
+int n; ll ans; string s;
 
-struct ptr {
-    ptr *ch[26];
-};
+ll digSum(string s) {
+    ll sum = 0;
+    while (s.size()) {
+        sum += s.back()-'0';
+        s.pop_back();
+    }
+    return sum;
+}
 
-struct test {
-    int n;
-    v(test) *ch;
-    map<int,test*> chM;
-};
 
 int main() {
-    test *temp = new test();
-    temp->chM[1] = new test();
-    cout << temp->n << " " << temp->ch+1 << " " << temp->chM[1] << " ";
-    if (temp->chM[0] == 0) cout << -1;
+    cin >> n;
+    fo(i,n) {
+        cin >> s;
+        ans = max(ans, digSum(s));
+    }
+    cout << ans << endl;
 }
