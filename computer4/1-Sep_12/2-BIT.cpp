@@ -16,31 +16,32 @@ using namespace std;
 const int MS = 1e5+2;
 
 int n, m, a; 
-ll bit[MS], bitF[MS];
+ll bit[MS], bitF[MS], freq[MS];
 
-void update(ll tree[MS], int i, int x) {
-    while (i <= n) {
-        tree[i] = x;
-        i += (i & -i);
+void update(ll tree[MS], int idx, int x, int lim) {
+    while (idx <= lim) {
+        tree[idx] += x;
+        idx += (idx & -idx);
     }
 }
-ll qTo(ll tree[MS], int i) {
+ll qTo(ll tree[MS], int idx) {
     ll sum = 0;
-    while (i > 0) {
-        sum += tree[i];
-        i -= (i & -i);
+    while (idx > 0) {
+        sum += tree[idx];
+        idx -= (idx & -idx);
     }
     return sum;
 }
-ll qAt(ll tree[MS], int i) {
-    ll sum = tree[i];
-    if (i) {
-        int z = i - (i & -i), y = i -1;
-        while (y != z) {
+ll qAt(ll tree[MS], int idx) {
+    ll sum = tree[idx];
+    if (idx) {
+        int z = idx - (idx & -idx), y = idx -1;
+        while (y > z) {
             sum -= tree[y];
             y -= (y & -y);
         }
     }
+    return sum;
 }
 
 
@@ -48,10 +49,14 @@ int main() {
     cin >> n >> m;
     Fo(i,1,n+1,1) {
         cin >> a;
-        bit[i] = bit[i & -i] = a;
-        bitF[a]++; bitF[a & -a]++;
+        bit[i] += a; bit[i + (i & -i)] += bit[i];
+        freq[a]++;
     }
-
+    Fo(i,1,n+1,1) {
+        bitF[i] += freq[i]; bitF[i + (i & -i)] += bitF[i];
+    }
+    fo(i,n+1) cout << qAt(bit, i) << " "; cout << endl;
+    fo(i,n+1) cout << qAt(bitF, i) << " "; cout << endl << endl;
     char c; int x, y;
     fo(i,m) {
         cin >> c >> x;
@@ -60,11 +65,14 @@ int main() {
         } else if (c == 'C') {
             cin >> y;
             int v = qAt(bit, x), f = qAt(bitF, v)-1, f2 = qAt(bitF, y);
-            update(bit, x, y);
-            update(bitF, v, f); update(bitF, y, f2+1);
+            update(bit, x, y-v, n);
+            update(bitF, v, -1, MS); update(bitF, y, 1, MS);
         } else {
             cin >> y; 
-            cout << qTo(bit, x) - qTo(bit, x-1) << endl;
+            int a = qTo(bit, x), b = qTo(bit, x-1);
+            cout << a-b << ": " << a << " " << b  << endl;
         }
+        fo(i,n+1) cout << qAt(bit, i) << " "; cout << endl;
+        fo(i,n+1) cout << qAt(bitF, i) << " "; cout << endl << endl;
     }
 }
