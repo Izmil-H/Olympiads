@@ -21,7 +21,12 @@ const int MS = 1e5+2;
 
 int n, k, a[MS], q;
 queue<int> mins, maxs;
+int left[MS], right[MS];
 
 int main() {
-    cin >> n;
+    cin >> n >> k;
+    fo(i,n) cin >> a[i];
+    for(int l = 0, r = 0; l < n; l++) {
+        while ()
+    }
 }
