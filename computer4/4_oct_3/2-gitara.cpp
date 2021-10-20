@@ -27,21 +27,17 @@ int main() {
     int x, y, prev = NULL;
     fo(i,n) {
         cin >> x >> y;
-        if (x != prev) {
-            prev = x;
-            //ans += stk.size(); stk.clear();
-            //cout << "RELEASE ALL " << ans << endl;
-            ans++; stk.pb(y);
-            cout << "ADD " << y << " " << ans << endl;
-            continue;
+
+        //ans += stk.size(); stk.clear();
+        //cout << "RELEASE ALL " << ans << endl;
+
+        while (!stk[x].empty() && y < stk[x].back()) {
+            //cout << "RELEASE " << stk[x].back() << " " << ans+1 << endl; 
+            stk[x].pop_back(); ans++;
         }
-        while (!stk.empty() && y < stk.back()) {
-            cout << "RELEASE " << stk.back() << " " << ans+1 << endl; 
-            stk.pop_back(); ans++;
-        }
-        if (stk.back() != y) {
-            ans++; stk.pb(y);
-            cout << "ADD " << y << " " << ans << endl;
+        if (stk[x].empty() || stk[x].back() != y) {
+            ans++; stk[x].pb(y);
+            //cout << "ADD " << y << " " << ans << endl;
         }
     }
     cout << ans;

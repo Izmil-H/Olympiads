@@ -43,7 +43,6 @@ int main() {
         cout << ans[i] << endl;
     }
 }
-
 /*
 
 cow: 2 4 3 1 5
