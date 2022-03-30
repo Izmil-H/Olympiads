@@ -1,7 +1,0 @@
-Graph theory:
-    - detecting cycle
-    - find length of cycle
-
-
-Dynamic Programming:
-    - 
